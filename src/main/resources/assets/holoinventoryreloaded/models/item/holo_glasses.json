@@ -1,0 +1,7 @@
+{
+  "parent": "holoinventoryreloaded:item/glasses_base_16x",
+  "textures": {
+    "1": "holoinventoryreloaded:item/glasses_frames",
+    "2": "holoinventoryreloaded:item/glasses_lens"
+  }
+}

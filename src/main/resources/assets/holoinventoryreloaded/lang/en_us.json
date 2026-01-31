@@ -1,0 +1,14 @@
+{
+  "config.holoinventoryreloaded.title": "HoloInventory Reloaded Config",
+  "config.holoinventoryreloaded.category.general": "General Settings",
+  "config.holoinventoryreloaded.defaultDisplay": "Default Display",
+  "config.holoinventoryreloaded.renderDistance": "Max Render Distance",
+  "config.holoinventoryreloaded.scale": "Display Scale",
+  "config.holoinventoryreloaded.maxItems": "Max Items Displayed",
+  "config.holoinventoryreloaded.minRenderDistance": "Min Hide Distance",
+  "config.holoinventoryreloaded.showItemCount": "Show Item Count",
+  "config.holoinventoryreloaded.showContainerName": "Show Container Name",
+  "config.holoinventoryreloaded.render3D": "3D Render Mode",
+  "item.holoinventoryreloaded.holo_glasses": "Holo Glasses",
+  "curios.identifier.glasses": "Glasses"
+}

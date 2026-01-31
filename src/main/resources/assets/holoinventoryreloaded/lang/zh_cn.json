@@ -1,0 +1,14 @@
+{
+  "config.holoinventoryreloaded.title": "全息物品显示配置",
+  "config.holoinventoryreloaded.category.general": "常规设置",
+  "config.holoinventoryreloaded.defaultDisplay": "默认显示",
+  "config.holoinventoryreloaded.renderDistance": "最大渲染距离",
+  "config.holoinventoryreloaded.scale": "显示缩放",
+  "config.holoinventoryreloaded.maxItems": "最大显示物品数",
+  "config.holoinventoryreloaded.minRenderDistance": "最小隐藏距离",
+  "config.holoinventoryreloaded.showItemCount": "显示物品数量",
+  "config.holoinventoryreloaded.showContainerName": "显示容器名称",
+  "config.holoinventoryreloaded.render3D": "3D 渲染模式",
+  "item.holoinventoryreloaded.holo_glasses": "全息护目镜",
+  "curios.identifier.glasses": "眼镜"
+}
