@@ -11,3 +11,5 @@ HoloInventory Reloaded - 物品显示重置版
 (2D显示)
 ![3](image/3.png)
 (配置界面，需要加入Cloth Config API)
+
+我使用了 Nova-Committee Team 所制作的Glasses模组的眼镜模型，按照此模组的协议，已对模组本体使用AGPL-3.0协议开源。
