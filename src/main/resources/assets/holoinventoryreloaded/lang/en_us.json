@@ -1,0 +1,11 @@
+{
+  "config.holoinventoryreloaded.title": "HoloInventory Reloaded Configuration",
+  "config.holoinventoryreloaded.category.general": "General Settings",
+  "config.holoinventoryreloaded.enable": "Enable HoloInventory",
+  "config.holoinventoryreloaded.range": "Render Range",
+  "config.holoinventoryreloaded.showName": "Show Container Name",
+  "config.holoinventory.items_per_row": "Items Per Row",
+  "config.holoinventory.render_mode": "Render Mode",
+  "config.holoinventory.render_mode.mode_2d": "2D Mode",
+  "config.holoinventory.render_mode.mode_3d": "3D Mode"
+}

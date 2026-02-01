@@ -1,0 +1,12 @@
+{
+  "config.holoinventoryreloaded.title": "全息物品显示配置",
+  "config.holoinventoryreloaded.category.general": "常规设置",
+  "config.holoinventoryreloaded.enableHoloInventory": "默认显示",
+  "config.holoinventoryreloaded.renderRange": "最大渲染距离",
+  "config.holoinventoryreloaded.renderScale": "显示缩放",
+  "config.holoinventoryreloaded.maxItems": "最大显示物品数",
+  "config.holoinventoryreloaded.minHideDistance": "最小隐藏距离",
+  "config.holoinventoryreloaded.showItemCount": "显示物品数量",
+  "config.holoinventoryreloaded.showName": "显示容器名称",
+  "config.holoinventoryreloaded.mode3D": "3D 渲染模式"
+}
