@@ -44,9 +44,9 @@ public class ClothConfigScreen {
                 .build());
 
         general.addEntry(entryBuilder.startIntField(Component.translatable("config.holoinventoryreloaded.maxItems"), Config.maxItems)
-                .setDefaultValue(27)
+                .setDefaultValue(1024)
                 .setMin(1)
-                .setMax(81)
+                .setMax(2048)
                 .setSaveConsumer(newValue -> {
                     Config.maxItems = newValue;
                     Config.MAX_ITEMS.set(newValue);

@@ -27,7 +27,7 @@ public class Config {
 
     public static final ModConfigSpec.IntValue MAX_ITEMS = BUILDER
             .comment("最大显示的物品数量")
-            .defineInRange("maxItems", 27, 1, 81);
+            .defineInRange("maxItems", 1024, 1, 2048);
 
     public static final ModConfigSpec.DoubleValue MIN_RENDER_DISTANCE = BUILDER
             .comment("玩家距离方块过近时不显示全息图的最小距离")
@@ -55,7 +55,7 @@ public class Config {
     public static double scale = 1.0;
     public static double itemScale = 1.0;
     public static double itemSpacing = 0.45;
-    public static int maxItems = 27;
+    public static int maxItems = 1024;
     public static double minRenderDistance = 1.5;
 
     public static void load() {

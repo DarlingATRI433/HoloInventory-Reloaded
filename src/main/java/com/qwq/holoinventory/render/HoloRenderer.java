@@ -70,7 +70,8 @@ public class HoloRenderer {
         
         // 如果没有缓存或需要更新，发送请求给服务器
         if (NetworkHandler.shouldRequest(pos)) {
-            PacketDistributor.sendToServer(new InventoryRequestPayload(pos));
+            int lastHash = (data != null) ? data.hash() : 0;
+            PacketDistributor.sendToServer(new InventoryRequestPayload(pos, lastHash));
         }
 
         if (data == null || data.items().isEmpty()) {
@@ -132,10 +133,22 @@ public class HoloRenderer {
         poseStack.translate(0, 0, 0.9);
 
         // 4. 计算动态缩放和布局
-        int maxItems = Config.maxItems;
-        int count = Math.min(items.size(), maxItems);
+        int totalItems = items.size();
         int columns = 9; // 宽 9 格布局
-        int rows = (int) Math.ceil((double) count / columns);
+        int displayRows = 3; // 固定显示 3 行
+        int totalRows = (int) Math.ceil((double) totalItems / columns);
+        
+        // 获取滚动偏移并修正
+        int scrollOffset = NetworkHandler.getScrollOffset(pos);
+        if (scrollOffset > Math.max(0, totalRows - displayRows)) {
+            scrollOffset = Math.max(0, totalRows - displayRows);
+            NetworkHandler.setScrollOffset(pos, scrollOffset);
+        }
+        
+        int startIndex = scrollOffset * columns;
+        int endIndex = Math.min(startIndex + columns * displayRows, totalItems);
+        int count = endIndex - startIndex;
+        int currentRows = (int) Math.ceil((double) count / columns);
         
         // 调慢旋转速度：将 0.05f 降为 0.02f
         float time = (mc.level.getGameTime() + event.getPartialTick().getGameTimeDeltaTicks()) * 0.01f;
@@ -168,14 +181,14 @@ public class HoloRenderer {
 
         // 6. 渲染物品网格 (9列布局)
         float startX = -(Math.min(count, columns) - 1) * spacing / 2f;
-        float startY = (rows - 1) * verticalSpacing / 2f;
+        float startY = (currentRows - 1) * verticalSpacing / 2f;
 
         // --- 第一阶段：渲染物品图标 ---
         for (int i = 0; i < count; i++) {
             int row = i / columns;
             int col = i % columns;
             
-            ItemStack stack = items.get(i);
+            ItemStack stack = items.get(startIndex + i);
             poseStack.pushPose();
             
             float x = startX + col * spacing;
@@ -184,7 +197,7 @@ public class HoloRenderer {
             
             if (Config.render3D) {
                 // 3D 模式：掉落物旋转效果
-                poseStack.mulPose(Axis.YP.rotation(time * 1.5f + i));
+                poseStack.mulPose(Axis.YP.rotation(time * 1.5f + (startIndex + i)));
                 poseStack.scale(finalItemScale, finalItemScale, finalItemScale);
                 mc.getItemRenderer().renderStatic(stack, ItemDisplayContext.GROUND, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, mc.level, 0);
             } else {
@@ -205,7 +218,12 @@ public class HoloRenderer {
         // --- 第二阶段：渲染文字 (名称和数量) ---
         // 渲染容器名称 (在列表上方，增加间距防止遮挡)
         if (Config.showContainerName) {
-            HoloTextRenderer.renderContainerName(poseStack, data.name(), 0, startY + spacing * 1.2f, globalScale);
+            // 如果有更多物品未显示，在名称后加一个提示
+            String displayName = data.name();
+            if (totalRows > displayRows) {
+                displayName += String.format(" (%d/%d)", scrollOffset + 1, totalRows - displayRows + 1);
+            }
+            HoloTextRenderer.renderContainerName(poseStack, displayName, 0, startY + spacing * 1.2f, globalScale);
         }
 
         if (Config.showItemCount) {
@@ -213,7 +231,7 @@ public class HoloRenderer {
                 int row = i / columns;
                 int col = i % columns;
                 
-                ItemStack stack = items.get(i);
+                ItemStack stack = items.get(startIndex + i);
                 poseStack.pushPose();
                 
                 float x = startX + col * spacing;

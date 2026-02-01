@@ -3,6 +3,7 @@ package com.qwq.holoinventory.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qwq.holoinventory.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
@@ -43,6 +44,7 @@ public class InventoryScanner {
         IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, pos, null);
         if (handler != null) {
             for (int i = 0; i < handler.getSlots(); i++) {
+                if (stacks.size() >= Config.maxItems) break;
                 ItemStack stack = handler.getStackInSlot(i);
                 if (!stack.isEmpty()) {
                     mergeStack(stacks, stack);
@@ -52,6 +54,7 @@ public class InventoryScanner {
         // 2. 尝试作为原生 Container 获取 (适用于部分原生容器或未适配 Capability 的模组)
         else if (blockEntity instanceof Container container) {
             for (int i = 0; i < container.getContainerSize(); i++) {
+                if (stacks.size() >= Config.maxItems) break;
                 ItemStack stack = container.getItem(i);
                 if (!stack.isEmpty()) {
                     mergeStack(stacks, stack);
